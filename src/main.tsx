@@ -4,6 +4,8 @@ import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import App from "./App.tsx";
 import theme from "./components/theme.ts";
 import "./index.css";
+import 'bootstrap/dist/css/bootstrap.css';
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ChakraProvider theme={theme}>

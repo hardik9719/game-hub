@@ -1,6 +1,17 @@
 import { CanceledError } from "axios";
 import { useState, useEffect } from "react";
-import gameService, { Game } from "../services/game-service";
+import gameService from "../services/game-service";
+export interface Game{
+  id:number
+  title: string;
+  thumbnail:string;
+  game_url:string;
+  genre:string;
+  platform:string;
+  freetogame_profile_url:string;
+  short_description:string;
+
+}
 
 export const useGames = () => {
     const [games, setGames] = useState<Game[]>([]);
@@ -18,7 +29,7 @@ export const useGames = () => {
           setIsLoading(false);
         })
         .catch((error) => {
-          console.log(JSON.stringify(error));
+          // console.log(JSON.stringify(error));
           if (error instanceof CanceledError) return;
           setError(error.message);
         })

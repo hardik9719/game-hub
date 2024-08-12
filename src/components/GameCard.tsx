@@ -1,6 +1,6 @@
-import React from 'react'
 import { Game } from '../hooks/useGames'
-import { Card, CardHeader, CardBody, Stack, Text,Image,HStack, CardFooter, Button, Heading } from '@chakra-ui/react'
+import { Card, CardBody, Stack, Text,Image,HStack, CardFooter, Button, Heading } from '@chakra-ui/react'
+import { PlatformIconList } from './PlatformIconList'
 interface Props{
     game:Game
 }
@@ -17,9 +17,9 @@ export const GameCard = ({game}:Props) => {
               <Heading>{game.title}</Heading>
           </HStack>
           <Text>{game.short_description}</Text>
-          <HStack justify='space-between'>
+          <HStack justify='space-between' verticalAlign='text-bottom'>
               <Text>{game.genre}</Text>
-              <Text>{game.platform}</Text>
+              <PlatformIconList platform={game.platform} />
           </HStack>
       </Stack>
   </CardBody>

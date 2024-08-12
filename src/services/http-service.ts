@@ -1,15 +1,11 @@
 import apiClient from "./api-client";
-export interface Entity{
-    id:number
-}
-
 class HttpService{
     endpoint:string;
 
     constructor(endpoint:string){
         this.endpoint = endpoint;
     }
-    getAll<T extends Entity>(){
+    getAll<T>(){
     const controller = new AbortController();
     
     const request=  apiClient
@@ -22,17 +18,17 @@ class HttpService{
       .delete(this.endpoint + id);
      }
 
-    create<T extends Entity>(entity:T){
-        return apiClient
-      .post(this.endpoint, entity)
-    }
-    update<T extends Entity>(entity:T){
-        return apiClient
-        .patch(
-          this.endpoint + "/"+ entity.id,
-          entity
-        )
-    }
+    // create<T>(entity:T){
+    //     return apiClient
+    //   .post(this.endpoint, entity)
+    // }
+    // update<T>(entity:T){
+    //     return apiClient
+    //     .patch(
+    //       this.endpoint + "/"+ entity.id,
+    //       entity
+    //     )
+    // }
 
 
 }

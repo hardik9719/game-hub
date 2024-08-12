@@ -1,121 +1,77 @@
 import axios, { CanceledError } from "axios";
 import { useEffect, useState } from "react";
-import gameService, {
-  AccessToken,
-  Game,
-  getToken,
-} from "../services/game-service";
-import apiClient from "../services/api-client";
+import gameService, {Game,} from "../services/game-service";
+import useGames from "../hooks/useGames";
+import { Card, CardHeader, Heading, Image,CardBody, CardFooter, Button,Text, SimpleGrid, HStack, Stack } from "@chakra-ui/react";
 
 export const GameGrid = () => {
-  const [acessToken, setAcessToken] = useState<AccessToken>();
-  useEffect(() => {
-    // getToken()
-    //   .then(({ data }) => setAcessToken(data))
-    //   .catch((err) => console.log(err));
-  }, []);
-  const [games, setGames] = useState<Game[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  //   apiClient.interceptors.request.use(
-  //     function (config) {
-  //       if (!acessToken) return Promise.reject(error);
-  //       config.headers["Authorization"] = "Bearer " + acessToken.access_token;
-  //       config.headers["access-control-allow-origin"] = "*";
+    const {games,error,isLoading, setError,setUsers} = useGames();
+  return <>
+  {error && <p className="text-danger">{error}</p>}
+  <SimpleGrid spacing={4} columns={5}>
+  {games.slice(0,10).map(g=>{
+    return <Card borderRadius='10px' key={g.id}>
+    <CardHeader>
+    <Image
+      src={g.thumbnail}
+      alt='Green double couch with wooden legs'
+      borderRadius='lg'
+    />
+    </CardHeader>
+    <CardBody>
+        <Stack>
+            <HStack>
+                <Text>{g.title}</Text>
+            </HStack>
+            <Text>{g.short_description}</Text>
+            <HStack justify='space-between'>
+                <Text>{g.genre}</Text>
+                <Text>{g.platform}</Text>
+            </HStack>
+        </Stack>
+    </CardBody>
+    <CardFooter>
+      <Button>View here</Button>
+    </CardFooter>
+  </Card>
+  })}
+</SimpleGrid>
+  </>
+//   return (
+//     <>
+//       {error && <p className="text-danger">{error}</p>}
+//       {isLoading && <div className="spinner-border"></div>}
 
-  //       return config;
-  //     },
-  //     function (error) {
-  //       return Promise.reject(error);
-  //     }
-  //   );
-
-  useEffect(() => {
-    setIsLoading(true);
-    console.log("sending");
-    console.log(apiClient.defaults);
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-    // apiClient
-    //   .get("/games")
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Ereror:", error);
-    //   });
-    // axios
-    //   .post("https://api.igdb.com/v4/games", "fields name; limit 10;", {
-    //     headers: {
-    //       Client-ID: "nz6zfkre0wra9k6hgecit3sjo77hkv",
-    //       Authorization: "Bearer " + acessToken?.access_token,
-    //       Access-Control-Allow-origin: "*",
-    //       Access-Control-Allow-Headers:"Origin, X-Requested-With, Content-Type, Accept",
-    //     },
-    //   })
-    //   //   moby_Q7ndcibdGRygIJvmV3WsIxCwJun
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
-
-    const { request, cancel } = gameService.getAll<Game>();
-    request
-      .then(({ data }) => {
-        console.log(data);
-
-        setGames(data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log("ee");
-
-        console.log(JSON.stringify(error));
-
-        if (error instanceof CanceledError) return;
-        setError(error.message);
-      })
-      .finally(() => setIsLoading(false));
-    return () => cancel();
-    //optionally return to do clean up basically unsubscribe to what use effect is doing
-  }, []);
-  // return {users,error,isLoading, setUsers: setGames,setError};
-  return (
-    <>
-      {error && <p className="text-danger">{error}</p>}
-      {isLoading && <div className="spinner-border"></div>}
-
-      <button
-        className="btn btn-primary mb-3"
-        //   onClick={addUser}
-      >
-        Add User
-      </button>
-      <ul className="list-group">
-        {games.map((g) => (
-          <li
-            key={g.id}
-            className="list-group-item d-flex justify-content-between"
-          >
-            {g.title}
-            <div>
-              <button
-                className="btn btn-outline-secondary mx-1"
-                // onClick={() => updateUser(u)}
-              >
-                Update
-              </button>
-              <button
-                className="btn btn-outline-danger"
-                // onClick={() => deleteUser(u)}
-              >
-                Delete
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </>
-  );
+//       <button
+//         className="btn btn-primary mb-3"
+//         //   onClick={addUser}
+//       >
+//         Add User
+//       </button>
+//       <ul className="list-group">
+//         {games.map((g) => (
+//           <li
+//             key={g.id}
+//             className="list-group-item d-flex justify-content-between"
+//           >
+//             {g.title}
+//             <div>
+//               <button
+//                 className="btn btn-outline-secondary mx-1"
+//                 // onClick={() => updateUser(u)}
+//               >
+//                 Update
+//               </button>
+//               <button
+//                 className="btn btn-outline-danger"
+//                 // onClick={() => deleteUser(u)}
+//               >
+//                 Delete
+//               </button>
+//             </div>
+//           </li>
+//         ))}
+//       </ul>
+//     </>
+//   );
 };

@@ -9,13 +9,6 @@ class HttpService{
     constructor(endpoint:string){
         this.endpoint = endpoint;
     }
-    getToken(url:string){
-      const controller = new AbortController();
-      const request=  apiClient
-                              .post(url,{signal:controller.signal,});
-    return {request,cancel:()=>controller.abort()}
-    
-    }
     getAll<T extends Entity>(){
     const controller = new AbortController();
     

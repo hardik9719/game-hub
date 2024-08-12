@@ -11,5 +11,5 @@ export interface Game{
 
 }
 
-export const useGames = () => useData<Game>('/games')
+export const useGames = (selectedCategory:string | null) => useData<Game>('/games',{params:{category:selectedCategory?selectedCategory:undefined}},[selectedCategory])
 export default useGames;

@@ -1,16 +1,27 @@
+import { Button, List, ListItem, Spinner } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
-
-export const GenreList = () => {
-  const { data } = useGames();
+interface Props{
+    onSelectCategory:(genre:string)=>void;
+}
+export const GenreList = ({onSelectCategory}:Props) => {
+  const { data, isLoading } = useGames(null);
   const uniqueCategory = Array.from(
-    new Set(data.map((item) => item.genre.trim()))
+    new Set(data.map((item) => item.genre))
   );
-
+  if (isLoading) return <Spinner />;
   return (
-    <ul>
+    <List>
       {uniqueCategory.map((category) => (
-        <li key={category}>{category}</li>
+        <ListItem fontSize="lg" key={category}>
+          <Button
+            onClick={() => onSelectCategory(category)}
+            fontSize="lg"
+            variant="link"
+          >
+            {category}
+          </Button>
+        </ListItem>
       ))}
-    </ul>
+    </List>
   );
 };

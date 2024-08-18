@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Grid, GridItem, Show } from '@chakra-ui/react'
+import { Grid, GridItem, Show } from '@chakra-ui/react'
 import { NavBar } from './components/NavBar'
 import { GameGrid } from './components/GameGrid'
 import { GenreList } from './components/GenreList'
@@ -20,7 +20,7 @@ templateColumns={{
   <Show above='lg'>
 
   <GridItem area='aside' padding='10px'>
-    <GenreList onSelectCategory={(category)=>setSelectedCategory(category)}/>
+    <GenreList selectedGenre={selectedCategory} onSelectCategory={(category)=>setSelectedCategory(category)}/>
   </GridItem>
   </Show>
   <GridItem area='main'>

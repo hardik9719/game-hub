@@ -2,8 +2,9 @@ import { Button, List, ListItem, Spinner } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 interface Props{
     onSelectCategory:(genre:string)=>void;
+    selectedGenre: string| null;
 }
-export const GenreList = ({onSelectCategory}:Props) => {
+export const GenreList = ({onSelectCategory,selectedGenre}:Props) => {
   const { data, isLoading } = useGames(null);
   const uniqueCategory = Array.from(
     new Set(data.map((item) => item.genre))
@@ -14,6 +15,7 @@ export const GenreList = ({onSelectCategory}:Props) => {
       {uniqueCategory.map((category) => (
         <ListItem fontSize="lg" key={category}>
           <Button
+          fontWeight={category===selectedGenre?'bold':'normal'}
             onClick={() => onSelectCategory(category)}
             fontSize="lg"
             variant="link"

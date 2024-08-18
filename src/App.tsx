@@ -3,6 +3,7 @@ import { NavBar } from './components/NavBar'
 import { GameGrid } from './components/GameGrid'
 import { GenreList } from './components/GenreList'
 import { useState } from 'react'
+import { PlatfromSelector } from './components/PlatfromSelector'
 function App() {
 const [selectedCategory,setSelectedCategory] = useState<string | null>(null);
 return <Grid templateAreas={{
@@ -24,6 +25,7 @@ templateColumns={{
   </GridItem>
   </Show>
   <GridItem area='main'>
+    <PlatfromSelector/>
     <GameGrid selectedCategory={selectedCategory}></GameGrid>
 
   </GridItem>

@@ -3,36 +3,28 @@ import apiClient from "./api-client";
 class HttpService{
     endpoint:string;
     requestConfig?:AxiosRequestConfig;
+    controller:AbortController = new AbortController();
 
     constructor(endpoint:string,requestConfig?:AxiosRequestConfig){
         this.endpoint = endpoint;
         this.requestConfig = requestConfig
     }
     getAll<T>(){
-    const controller = new AbortController();
     
     const request=  apiClient
-    .get<T[]>(this.endpoint,{signal:controller.signal,...this.requestConfig});
-    return {request,cancel:()=>controller.abort()}
+    .get<T[]>(this.endpoint,{signal:this.controller.signal,...this.requestConfig});
+    return {request,cancel:()=>this.controller.abort()}
     
+    }
+    postData<T>(){
+        const request=  apiClient
+                                .post<T[]>(this.endpoint,this.requestConfig?.data,{signal:this.controller.signal,...this.requestConfig});
+        return {request,cancel:()=>this.controller.abort()}
     }
      delete(id:number){
         return apiClient
       .delete(this.endpoint + id);
      }
-
-    // create<T>(entity:T){
-    //     return apiClient
-    //   .post(this.endpoint, entity)
-    // }
-    // update<T>(entity:T){
-    //     return apiClient
-    //     .patch(
-    //       this.endpoint + "/"+ entity.id,
-    //       entity
-    //     )
-    // }
-
 
 }
 

@@ -9,7 +9,7 @@ export const useData = <T>(endpoint:string,requestConfig?:AxiosRequestConfig,dep
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
       setIsLoading(true);
-      const { request, cancel } = create(endpoint,requestConfig).getAll<T>();
+      const { request, cancel } = create(endpoint,requestConfig).postData<T>();
       request
         .then(({ data }) => {
           setData(data);

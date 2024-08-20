@@ -45,9 +45,14 @@ export const useIGDBGames = (gameQuery:GameQuery) =>{
   let filters:string[] =[];
   if(gameQuery.genre!=null)filters.push(`genres = ${gameQuery.genre.id}`);
   if(gameQuery.platform!=null)filters.push(`release_dates.platform = ${gameQuery.platform.id}`);
-
+  
+  console.log(filters);
+  
   if (filters.length > 0) {
-    queryString += " where " + filters.join(" & ")+";";
+    queryString += " where " + filters.join(" & ")+";"
+  }
+  if (gameQuery.sortOrder) {
+    queryString += ` sort ${gameQuery.sortOrder};`;
   }
 
   

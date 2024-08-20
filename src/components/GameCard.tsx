@@ -19,7 +19,7 @@ interface Props {
 export const GameCard = ({ game }: Props) => {
 
   return (
-    <Card borderRadius="10px" overflow="hidden" key={game.id}>
+    <Card  key={game.id}>
       <Image
         src={getImageUrl(game.cover?.url)}
         alt="Green double couch with wooden legs"

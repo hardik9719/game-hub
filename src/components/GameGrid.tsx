@@ -4,6 +4,7 @@ import { GameCard } from "./GameCard";
 import { GameCardSkeleton } from "./GameCardSkeleton";
 import useIGDBGames from "../hooks/useIGDBGame";
 import { Genre } from "../hooks/useGenres";
+import { GameCardContainer } from "./GameCardContainer";
 interface Props {
   selectedGenre: Genre | null;
 }
@@ -24,9 +25,17 @@ export const GameGrid = ({ selectedGenre }: Props) => {
         padding={10}
       >
         {isLoading &&
-          skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
+          skeletons.map((skeleton) => (
+            <GameCardContainer>
+              <GameCardSkeleton key={skeleton} />
+            </GameCardContainer>
+          ))}
         {data.slice(0, 10).map((game) => {
-          return <GameCard key={game.id} game={game}></GameCard>;
+          return (
+            <GameCardContainer>
+              <GameCard key={game.id} game={game}></GameCard>
+            </GameCardContainer>
+          );
         })}
       </SimpleGrid>
     </>

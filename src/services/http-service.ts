@@ -18,7 +18,7 @@ class HttpService{
     }
     postData<T>(){
         const request=  apiClient
-                                .post<T[]>(this.endpoint,this.requestConfig?.data,{signal:this.controller.signal,...this.requestConfig});
+                                .post<T[]>(this.endpoint,this.requestConfig?.data,{signal:this.controller.signal});
         return {request,cancel:()=>this.controller.abort()}
     }
      delete(id:number){

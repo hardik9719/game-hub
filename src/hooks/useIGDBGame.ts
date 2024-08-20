@@ -16,8 +16,7 @@ export interface Game extends Entity{
   aggregated_rating:number;
 
 }
-export interface Platform{
-  id:number;
+export interface Platform extends Entity{
   name:string;
   slug:string;
 }

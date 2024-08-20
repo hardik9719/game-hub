@@ -5,7 +5,7 @@ interface Props {
   selectedGenre: Genre | null;
 }
 export const GenreList = ({
-  onSelectGenre: onSelectCategory,
+  onSelectGenre,
   selectedGenre,
 }: Props) => {
   const { data, isLoading,error} = useGenres("fields name,slug;");
@@ -21,7 +21,7 @@ export const GenreList = ({
               genre.id === selectedGenre?.id ? "bold" : "normal"
             }
             onClick={() =>
-              onSelectCategory(genre)
+              onSelectGenre(genre)
             }
             fontSize="lg"
             variant="link"

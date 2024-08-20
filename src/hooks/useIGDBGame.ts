@@ -3,7 +3,6 @@ import useData from "./useData";
 import { Genre } from "./useGenres";
 export interface Entity{
   id:number;
-  type:QueryType
 }
 export interface Game extends Entity{
 

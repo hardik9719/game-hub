@@ -9,7 +9,6 @@ export const GenreList = ({
   selectedGenre,
 }: Props) => {
   const { data, isLoading,error} = useGenres("fields name,slug;");
-  console.log(data);
   if (error) return null;
   if (isLoading) return <Spinner />;
   return (

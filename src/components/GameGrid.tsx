@@ -9,10 +9,6 @@ interface Props {
 }
 export const GameGrid = ({ gameQuery }: Props) => {
   const { data, error, isLoading } = useIGDBGames(gameQuery);
-  console.log("games");
-
-  console.log(data);
-
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (

@@ -45,6 +45,7 @@ export const useIGDBGames = (gameQuery:GameQuery) =>{
   let filters:string[] =[];
   if(gameQuery.genre!=null)filters.push(`genres = ${gameQuery.genre.id}`);
   if(gameQuery.platform!=null)filters.push(`release_dates.platform = ${gameQuery.platform.id}`);
+  if(gameQuery.searchText)filters.push(`name =  "${gameQuery.searchText}"*`);
   
   
   if (filters.length > 0) {
@@ -53,7 +54,6 @@ export const useIGDBGames = (gameQuery:GameQuery) =>{
   if (gameQuery.sortOrder) {
     queryString += ` sort ${gameQuery.sortOrder};`;
   }
-
   
  return  useData<Game>('/games',{data:queryString},[gameQuery])
 }

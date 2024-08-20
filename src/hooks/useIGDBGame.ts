@@ -1,3 +1,4 @@
+import { GameQuery } from "../App";
 import useData from "./useData";
 import { Genre } from "./useGenres";
 export interface Entity{
@@ -39,18 +40,18 @@ export enum QueryType{
 const tagNumber = (query:Query)=>query.queryType << 28 | query.entity.id;
 
 
-export const useIGDBGames = (selectedGenre?:Genre | null,selectedPlatform?:Platform | null) =>{
+export const useIGDBGames = (gameQuery:GameQuery) =>{
   let queryString = "fields name,genres.name,genres.slug,platforms.name,platforms.slug,storyline,cover.url,aggregated_rating;"
   let filters:string[] =[];
-  if (selectedGenre) filters.push(`genres = ${selectedGenre.id}`);
-  if (selectedPlatform) filters.push(`release_dates.platform = ${selectedPlatform.id}`);
+  if(gameQuery.genre!=null)filters.push(`genres = ${gameQuery.genre.id}`);
+  if(gameQuery.platform!=null)filters.push(`release_dates.platform = ${gameQuery.platform.id}`);
 
   if (filters.length > 0) {
     queryString += " where " + filters.join(" & ")+";";
   }
 
   
- return  useData<Game>('/games',{data:queryString},[selectedGenre,selectedPlatform])
+ return  useData<Game>('/games',{data:queryString},[gameQuery])
 }
 
 

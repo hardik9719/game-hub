@@ -4,7 +4,7 @@ import usePlatforms from '../hooks/usePlatforms'
 import { Platform } from '../hooks/useIGDBGame'
 interface Props{
   onSelectPlatform:(platform:Platform)=>void;
-  selectedPlatform?:Platform
+  selectedPlatform:Platform | null
 }
 export const PlatfromSelector = ({onSelectPlatform,selectedPlatform}:Props) => {
   const {data,error} = usePlatforms();

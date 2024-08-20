@@ -5,8 +5,10 @@ import { GenreList } from "./components/GenreList";
 import { useState } from "react";
 import { PlatfromSelector } from "./components/PlatfromSelector";
 import { Genre } from "./hooks/useGenres";
+import { Platform } from "./hooks/useIGDBGame";
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [selectedPlatform,setSelectedPlatform] = useState<Platform | null>(null);
   return (
     <>
       <Grid
@@ -31,8 +33,8 @@ function App() {
           </GridItem>
         </Show>
         <GridItem area="main">
-          <PlatfromSelector />
-          <GameGrid selectedGenre={selectedGenre}></GameGrid>
+          <PlatfromSelector selectedPlatform={selectedPlatform} onSelectPlatform={(platform)=>setSelectedPlatform(platform)} />
+          <GameGrid selectedPlatform={selectedPlatform} selectedGenre={selectedGenre}></GameGrid>
         </GridItem>
       </Grid>
       {/* <IGDBView /> */}

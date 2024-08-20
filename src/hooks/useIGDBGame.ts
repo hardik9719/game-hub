@@ -39,14 +39,18 @@ export enum QueryType{
 const tagNumber = (query:Query)=>query.queryType << 28 | query.entity.id;
 
 
-export const useIGDBGames = (filter?:Genre | null) =>{
+export const useIGDBGames = (selectedGenre?:Genre | null,selectedPlatform?:Platform | null) =>{
   let queryString = "fields name,genres.name,genres.slug,platforms.name,platforms.slug,storyline,cover.url,aggregated_rating;"
-  if(filter){
-    // const tag = filter?tagNumber(filter):''
-    queryString+=`where genres = (${filter.id});`
+  let filters:string[] =[];
+  if (selectedGenre) filters.push(`genres = ${selectedGenre.id}`);
+  if (selectedPlatform) filters.push(`release_dates.platform = ${selectedPlatform.id}`);
+
+  if (filters.length > 0) {
+    queryString += " where " + filters.join(" & ")+";";
   }
+
   
- return  useData<Game>('/games',{data:queryString},[filter])
+ return  useData<Game>('/games',{data:queryString},[selectedGenre,selectedPlatform])
 }
 
 

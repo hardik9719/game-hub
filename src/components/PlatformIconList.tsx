@@ -1,4 +1,4 @@
-import { HStack, Icon, Text } from '@chakra-ui/react';
+import { HStack, Icon } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import {FaWindows,FaPlaystation,FaXbox,FaAndroid,FaGamepad, FaApple, FaLaptop, FaConciergeBell} from 'react-icons/fa'
 import { Platform } from '../hooks/useIGDBGame';

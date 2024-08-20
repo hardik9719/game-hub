@@ -5,5 +5,5 @@ export interface Genre extends Entity{
   slug:string;
 }
 
-export const useGenres = (body:string | null) => ({data:genres,isLoading:false,error:null})
+export const useGenres = () => ({data:genres,isLoading:false,error:null})
 export default useGenres;

@@ -20,9 +20,6 @@ export interface Platform extends Entity{
   name:string;
   slug:string;
 }
-interface Cover extends Entity{
-  url:string
-}
 export interface Query{
   entity:Entity;
   queryType:QueryType;
@@ -36,7 +33,7 @@ export enum QueryType{
   PlayerPerspective,
   None
 }
-const tagNumber = (query:Query)=>query.queryType << 28 | query.entity.id;
+// const tagNumber = (query:Query)=>query.queryType << 28 | query.entity.id;
 
 
 export const useIGDBGames = (gameQuery:GameQuery) =>{

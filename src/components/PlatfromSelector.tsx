@@ -8,9 +8,7 @@ interface Props{
 }
 export const PlatfromSelector = ({onSelectPlatform,selectedPlatform}:Props) => {
   const {data,error} = usePlatforms();
-  console.log('Platforms');
   
-  console.log(data);
   if(error) return null;
   return (
     <Menu>

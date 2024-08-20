@@ -1,18 +1,25 @@
-import { Icon } from '@chakra-ui/react';
+import { HStack, Icon, Text } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
-import {FaWindows,FaPlaystation,FaXbox,FaAndroid,FaGamepad} from 'react-icons/fa'
+import {FaWindows,FaPlaystation,FaXbox,FaAndroid,FaGamepad, FaApple, FaLaptop, FaConciergeBell} from 'react-icons/fa'
+import { Platform } from '../hooks/useIGDBGame';
 interface Props{
-    platform:string;
+    platforms:Platform[];
 }
-export const PlatformIconList = ({platform}:Props) => {
+export const PlatformIconList = ({platforms}:Props) => {
     const iconMap:{[key:string]:IconType} = {
-        "PC (Windows)":FaWindows,
-        playstation:FaPlaystation,
-        xbox:FaXbox,
-        android:FaAndroid,
-        "Web Browser":FaGamepad
+        "win":FaWindows,
+        "playstation":FaPlaystation,
+        "xbox":FaXbox,
+        "android":FaAndroid,
+        "Web Browser":FaGamepad,
+        "ios":FaApple,
+        "switch":FaGamepad,
+        "mac":FaLaptop,
+        "psvr":FaConciergeBell
     }
-  return (
-    <Icon as={iconMap[platform]} color='gray.500' />
-  )
+  return <>
+    <HStack>
+      {platforms.map(p=><Icon  key={p.slug} as={iconMap[p.slug]}></Icon>)}
+    </HStack>
+  </>
 }

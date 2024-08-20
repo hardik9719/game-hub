@@ -1,4 +1,4 @@
-import { Game } from "../hooks/useGames";
+import { Game } from "../hooks/useIGDBGame";
 import {
   Card,
   CardBody,
@@ -11,26 +11,29 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { PlatformIconList } from "./PlatformIconList";
+import getImageUrl from "../services/image-url";
 interface Props {
   game: Game;
 }
 export const GameCard = ({ game }: Props) => {
+
   return (
     <Card borderRadius="10px" overflow="hidden" key={game.id}>
       <Image
-        src={game.thumbnail}
+        src={getImageUrl(game.cover?.url)}
         alt="Green double couch with wooden legs"
         borderRadius="lg"
       />
+
       <CardBody>
         <Stack>
           <HStack>
-            <Heading>{game.title}</Heading>
+            <Heading>{game.name}</Heading>
           </HStack>
-          <Text>{game.short_description}</Text>
+          <Text noOfLines={[1, 2, 3]}>{game.storyline}</Text>
           <HStack justify="space-between">
-            <Text>{game.genre}</Text>
-            <PlatformIconList platform={game.platform} />
+            <Text>TBD</Text>
+            {game.platforms?<PlatformIconList platforms={game.platforms} />:null}
           </HStack>
         </Stack>
       </CardBody>

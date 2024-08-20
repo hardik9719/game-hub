@@ -8,14 +8,14 @@ export const GenreList = ({
   onSelectGenre: onSelectCategory,
   selectedGenre,
 }: Props) => {
-  const { data, isLoading } = useGenres("fields name,slug;");
+  const { data, isLoading,error} = useGenres("fields name,slug;");
   console.log(data);
-
+  if (error) return null;
   if (isLoading) return <Spinner />;
   return (
     <List>
       {data.map((genre) => (
-        <ListItem fontSize="lg" key={genre.id}>
+        <ListItem fontSize="lg" key={genre.id} paddingY='5px'>
           <Button
             fontWeight={
               genre.id === selectedGenre?.id ? "bold" : "normal"

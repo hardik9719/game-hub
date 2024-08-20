@@ -28,14 +28,14 @@ export const GameCard = ({ game }: Props) => {
 
       <CardBody>
         <Stack>
-          <HStack>
-            <Heading>{game.name}</Heading>
-          </HStack>
-          <Text noOfLines={[1, 2, 3]}>{game.storyline}</Text>
-          <HStack justify="space-between">
+          <HStack justify="space-between" marginBottom={3}>
             {game.platforms?<PlatformIconList platforms={game.platforms} />:null}
             <CriticScore score={game.aggregated_rating}></CriticScore>
           </HStack>
+          <HStack>
+            <Heading fontSize={20}>{game.name}</Heading>
+          </HStack>
+          <Text noOfLines={[1, 2, 3]}>{game.storyline}</Text>
         </Stack>
       </CardBody>
       <CardFooter>

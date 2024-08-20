@@ -14,6 +14,7 @@ export interface Game extends Entity{
   storyline:string;
   cover?:{url:string};
   screenshots:string;
+  aggregated_rating:number;
 
 }
 export interface Platform{
@@ -41,7 +42,7 @@ const tagNumber = (query:Query)=>query.queryType << 28 | query.entity.id;
 
 
 export const useIGDBGames = (filter?:Genre | null) =>{
-  let queryString = "fields name,genres,platforms.name,platforms.slug,storyline,cover.url,platforms,screenshots.url;"
+  let queryString = "fields name,genres,platforms.name,platforms.slug,storyline,cover.url,aggregated_rating;"
   if(filter){
     // const tag = filter?tagNumber(filter):''
     queryString+=`where genres = (${filter.id});`

@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { PlatformIconList } from "./PlatformIconList";
 import getImageUrl from "../services/image-url";
+import { CriticScore } from "./CriticScore";
 interface Props {
   game: Game;
 }
@@ -32,8 +33,8 @@ export const GameCard = ({ game }: Props) => {
           </HStack>
           <Text noOfLines={[1, 2, 3]}>{game.storyline}</Text>
           <HStack justify="space-between">
-            <Text>TBD</Text>
             {game.platforms?<PlatformIconList platforms={game.platforms} />:null}
+            <CriticScore score={game.aggregated_rating}></CriticScore>
           </HStack>
         </Stack>
       </CardBody>

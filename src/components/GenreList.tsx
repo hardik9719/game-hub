@@ -1,6 +1,5 @@
 import { Button, List, ListItem, Spinner } from "@chakra-ui/react";
 import useGenres, { Genre } from "../hooks/useGenres";
-import { Query, QueryType } from "../hooks/useIGDBGame";
 interface Props {
   onSelectGenre: (id: Genre) => void;
   selectedGenre: Genre | null;
